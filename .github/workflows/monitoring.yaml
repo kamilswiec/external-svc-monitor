@@ -1,0 +1,42 @@
+name: monitoring
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Apply
+        uses: ./
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          name: test
+          namespace: test
+          labels: |
+            release: prometheus-prom-stack
+            test: test
+            state.com: www.test.com
+          ip_address: 1.1.1.1
+          metrics_ports: cadvisor:9120,node-exporter:9110
+      - name: Delete
+        uses: ./
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          action: delete
+          name: test
+          namespace: test
+          labels: |
+            test: test
+            state.com: www.test.com
+          ip_address: 1.1.1.1
+          metrics_ports: cadvisor:9120,node-exporter:9110

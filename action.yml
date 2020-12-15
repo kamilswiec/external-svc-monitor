@@ -1,0 +1,30 @@
+name: 'kubectl-in-eks'
+author: 'kamilswiec@protonmail.com'
+description: 'Deploy resources to kubernetes cluster with kubectl'
+inputs:
+  kubeconfig:
+    description: 'Kube config used to authorize to cluster'
+    required: true
+  aws_access_key_id:
+    required: true
+  aws_secret_access_key:
+    required: true
+  name:
+    required: true
+  namespace:
+    required: true
+  labels:
+    required: true
+  ip_address:
+    required: true
+  metrics_ports:
+    description: 'Port provided in format "{name}:{port}, ..."'
+    required: true
+  action:
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'arrow-right-circle'  
+  color: 'blue'
