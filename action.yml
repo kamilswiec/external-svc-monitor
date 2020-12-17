@@ -18,7 +18,10 @@ inputs:
   ip_address:
     required: true
   metrics_ports:
-    description: 'Port provided in format "{name}:{port}, ..."'
+    description: 'Port provided in format "{name}:{port},..." - do not add space after ",".'
+    required: true
+  endpoints_config:
+    description: 'Endpoints configuration for service monitor'
     required: true
   action:
     required: false

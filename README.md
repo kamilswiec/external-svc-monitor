@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Apply
-        uses: kamilswiec/external-svc-monitor@v0.1.0
+        uses: kamilswiec/external-svc-monitor@v0.1.1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -27,7 +27,12 @@ jobs:
             release: prometheus-prom-stack
             test: test
           ip_address: 1.1.1.1
-          metrics_port: 9000
+          metrics_port: cadvisor:9010
+          endpoints_config: |
+            - port: cadvisor
+              metricRelabelings:
+                - sourceLabels: ['container_label_com_name']
+                  targetLabel: 'name'
 ```
 To delete created resources add input `action: delete`.
 Remember about `release` label if deployed prometheus operator with [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus).

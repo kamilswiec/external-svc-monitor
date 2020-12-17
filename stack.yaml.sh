@@ -31,7 +31,7 @@ $(for i in "${labels[@]}"; do echo "$i" | indent 3; done )
     matchNames:
       - ${INPUT_NAMESPACE}
   endpoints:
-$(for i in "${ports[@]}"; do echo - port: ${i%:*} | indent 2; done )
+$(echo "${INPUT_ENDPOINTS_CONFIG}" | indent 2;)
 ---
 apiVersion: v1		
 kind: Endpoints		

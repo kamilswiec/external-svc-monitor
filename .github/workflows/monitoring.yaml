@@ -26,6 +26,23 @@ jobs:
             state.com: www.test.com
           ip_address: 1.1.1.1
           metrics_ports: cadvisor:9120,node-exporter:9110
+          endpoints_config: |
+            - port: cadvisor
+              metricRelabelings:
+                - sourceLabels: ['container_label_com__customer']
+                  targetLabel: 'customer'
+                - sourceLabels: ['container_label_com__env']
+                  targetLabel: 'env'
+                - sourceLabels: ['container_label_com__project']
+                  targetLabel: 'project'
+            - port: node-exporter
+              metricRelabelings:
+                - sourceLabels: ['container_label_com__customer']
+                  targetLabel: 'customer'
+                - sourceLabels: ['container_label_com__env']
+                  targetLabel: 'env'
+                - sourceLabels: ['container_label_com__project']
+                  targetLabel: 'project'
       - name: Delete
         uses: ./
         with:
@@ -40,3 +57,20 @@ jobs:
             state.com: www.test.com
           ip_address: 1.1.1.1
           metrics_ports: cadvisor:9120,node-exporter:9110
+          endpoints_config: |
+            - port: cadvisor
+              metricRelabelings:
+                - sourceLabels: ['container_label_com__customer']
+                  targetLabel: 'customer'
+                - sourceLabels: ['container_label_com__env']
+                  targetLabel: 'env'
+                - sourceLabels: ['container_label_com__project']
+                  targetLabel: 'project'
+            - port: node-exporter
+              metricRelabelings:
+                - sourceLabels: ['container_label_com__customer']
+                  targetLabel: 'customer'
+                - sourceLabels: ['container_label_com__env']
+                  targetLabel: 'env'
+                - sourceLabels: ['container_label_com__project']
+                  targetLabel: 'project'
