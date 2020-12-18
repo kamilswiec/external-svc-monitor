@@ -30,8 +30,10 @@ $(for i in "${labels[@]}"; do echo "$i" | indent 3; done )
   namespaceSelector:
     matchNames:
       - ${INPUT_NAMESPACE}
+  targetLabels: [$(for i in "${labels[@]}"; do echo -n "${i%:*}, " ; done )]
   endpoints:
-$(echo "${INPUT_ENDPOINTS_CONFIG}" | indent 2;)
+$(if [[ -n ${INPUT_ENDPOINTS_CONFIG} ]];then echo "${INPUT_ENDPOINTS_CONFIG}" | indent 2;
+else for i in "${ports[@]}"; do echo - port: ${i%:*}| indent 2;done fi)
 ---
 apiVersion: v1		
 kind: Endpoints		

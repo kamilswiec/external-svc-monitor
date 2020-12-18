@@ -5,9 +5,7 @@ RUN apt -y update && apt -y install  \
     chmod +x ./kubectl &&\
     mv ./kubectl /usr/local/bin/kubectl &&\
     pip install --no-cache-dir \ 
-    awscli==1.18.195 \
-    Jinja2==2.11.2 \
-    j2cli==0.3.10
+    awscli==1.18.195
 
 COPY entrypoint.sh stack.yaml.sh /
 
